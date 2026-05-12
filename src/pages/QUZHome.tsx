@@ -110,6 +110,7 @@ const quizData = [
 ];
 
 const QuizApp = () => {
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
