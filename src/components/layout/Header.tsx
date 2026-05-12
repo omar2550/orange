@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import logo from "../../assets/orange_public_logo.png";
 
 const Header = () => {
 
@@ -9,7 +10,7 @@ const Header = () => {
         <div className="flex items-center p-4 bg-black text-white text-[12px] flex-wrap gap-4 font-medium">
             {hover && <div className="absolute inset-0 opacity-50 bg-black" />}
             <Link to={"/"}>
-                <img src="/public/logo.png" alt="orange" />
+                <img src={logo} alt="orange" />
             </Link>
             <div className="relative shadow-lg" onMouseEnter={() => setHover(true)}>
                 <Link to={"/Products"}>Products <span>▼</span>
