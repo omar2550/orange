@@ -16,7 +16,7 @@ interface Question {
   rationale: string;
 }
 
-const quizData = [
+const quizData: Question[] = [
   {
     question: "How many extra quota extensions can a customer add during a single bill cycle through all channels?",
     image: q1,
