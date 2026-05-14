@@ -9,7 +9,7 @@ import q7 from "../assets/quiz/q7.png";
 import q8 from "../assets/quiz/q8.png";
 import q9 from "../assets/quiz/q9.jpg";
 import q10 from "../assets/quiz/10.jpg";
-import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from 'lucide-react';
+// import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from 'lucide-react';
 
 interface Question {
   question: string;
@@ -307,18 +307,18 @@ const QuizApp = () => {
   };
 
   // تعديل وظائف التنقل لتشمل ريست التايمر
-  const handleNext = () => {
-    if (selectedOption !== null) handleNextQuestionLogic();
-  };
+  // const handleNext = () => {
+  //   if (selectedOption !== null) handleNextQuestionLogic();
+  // };
 
-  const handlePrev = () => {
-    if (currentQuestion > 0) {
-      setSelectedOption(null);
-      setIsCorrect(null);
-      setTimeLeft(30);
-      setCurrentQuestion(currentQuestion - 1);
-    }
-  };
+  // const handlePrev = () => {
+  //   if (currentQuestion > 0) {
+  //     setSelectedOption(null);
+  //     setIsCorrect(null);
+  //     setTimeLeft(30);
+  //     setCurrentQuestion(currentQuestion - 1);
+  //   }
+  // };
 
   return (
     <div className="min-h-screen bg-slate-100 flex items-center justify-center p-4 antialiased" dir="ltr">
