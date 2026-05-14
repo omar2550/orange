@@ -7,6 +7,9 @@ import q5 from "../assets/quiz/q5.png";
 import q6 from "../assets/quiz/q6.png";
 import q7 from "../assets/quiz/q7.png";
 import q8 from "../assets/quiz/q8.png";
+import q9 from "../assets/quiz/q9.jpg";
+import q10 from "../assets/quiz/10.jpg";
+import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from 'lucide-react';
 
 interface Question {
   question: string;
@@ -17,6 +20,104 @@ interface Question {
 }
 
 const quizData: Question[] = [
+  {
+    question: "If cst line is MSAN and when check agent found his port VDSL and cst said his router is VDSL, max attainable rate should not be less than ?",
+    image: "",
+    options: ["36", "40", "16", "85"],
+    answer: "36",
+    rationale: ""
+  },
+  {
+    question: "If cst complaint that the internet unstable and when agent check found: Line is MSAN Port and Router VDSL port up time from 2 hours Max attainable rate 30 SNR 7.5 Bit rate 25 agent should follow : ",
+    image: "",
+    options: ["Bad line wf", "Line unstable wf", "Line down wf", "Wrong port wf"],
+    answer: "Bad line wf",
+    rationale: ""
+  },
+  {
+    question: "Max Attainable Rate is 20480 & profile speed is 10240, that means ?",
+    image: "",
+    options: ["Cst has bitrate mismatch", "Cst doesn't have bit rate mismatch"],
+    answer: "Cst has bitrate mismatch",
+    rationale: ""
+  },
+  {
+    question: "if cst username was 0255438775-MSAN and we found cst have authentication login failed and his session logs was 0255438775-MSAM that mean cst have ?",
+    image: "",
+    options: ["Wrong username", "TR069", "Another ISP"],
+    answer: "Wrong username",
+    rationale: ""
+  },
+  {
+    question: "Noise Margin on online gaming should not be less than",
+    image: "",
+    options: ["60", "40", "100", "360"],
+    answer: "10",
+    rationale: ""
+  },
+  {
+    question: "If cst has TE bill he will have redirection no payment ?",
+    image: "",
+    options: ["True", "False"],
+    answer: "False",
+    rationale: ""
+  },
+  {
+    question: "If cst complaining about ping and after check agent found his Max is 36, agent should ?",
+    image: "",
+    options: ["follow online gaming WF", "follow bad line WF", "advise him to change his package to up to 70"],
+    answer: "follow bad line WF",
+    rationale: ""
+  },
+  {
+    question: "If cst complaining about line unstable, agent should advice him to connect from main without splitter within the call ?",
+    image: "",
+    options: ["True", "False"],
+    answer: "False",
+    rationale: ""
+  },
+  {
+    question: "Where agent can found wifi instability wf on pedia ?",
+    image: "",
+    options: ["Line unstable", "connection unstable", "Slow download"],
+    answer: "connection unstable",
+    rationale: ""
+  },
+  {
+    question: "Where agent can found Candidate wf on pedia ?",
+    image: "",
+    options: ["Plans", "How To Complain", "How To Pay", "How To Manage My Account"],
+    answer: "Plans",
+    rationale: ""
+  },
+  {
+    question: "we can check SNR from tab .......... on assurance?",
+    image: "",
+    options: ["Get Cpe status", "Get port parameters", "Get port up time", "Get ONU Status"],
+    answer: "Get port parameters",
+    rationale: ""
+  },
+  {
+    question: "if cst have Data&Voice Suspend that means he should pay ?",
+    image: "",
+    options: ["TE bill", "Orange bill", "Both of them"],
+    answer: "TE bill",
+    rationale: ""
+  },
+  {
+    question: "If cst bill renewed 12/12 on home internet 360 and cst upgrade to home internet 1040 on 1/1, his next bill will be ?",
+    image: "",
+    options: ["1,281.29", "1,120.45", "135.54", "241.29"],
+    answer: "1,281.29",
+    rationale: "((1040 - 360) / 31) * 11 + 1040 = 1,281.29"
+  },
+  {
+    question: "Agent should verify with cst (The line is under reseller) if he request to add static ip, by asking him about ?",
+    image: "",
+    options: ["Name and mobile number on siebel", "Name and mobile number and one of the last 2 bills paid when and from where", "Only full name on siebel", "one of the last 2 bills paid when and from where"],
+    answer: "Name and mobile number on siebel",
+    rationale: ""
+  },
   {
     question: "How many extra quota extensions can a customer add during a single bill cycle through all channels?",
     image: q1,
@@ -59,13 +160,6 @@ const quizData: Question[] = [
     answer: "On the next bill cycle",
     rationale: "Standard downgrades are always implemented starting from the next bill cycle."
   },
-  // {
-  //   question: "Which channel is NOT available for an 'Indirect Customer' (Reseller) to perform a Package Upgrade?",
-  //   image: "https://img.freepik.com/free-vector/wireless-router-electronic-device_107791-301.jpg",
-  //   options: ["My Orange App", "16333 Call Center", "Orange Portal", "Resellers"],
-  //   answer: "Resellers",
-  //   rationale: "Indirect customers cannot upgrade their package through Reseller channels; they must use Orange direct channels."
-  // },
   {
     question: "How many SMS notifications does a customer receive during the dunning process until the 5th day of suspension?",
     image: q7,
@@ -94,13 +188,6 @@ const quizData: Question[] = [
     answer: "1 Working Day",
     rationale: "High-speed upgrades (VDSL) take 1 working day for Ready Cabinets and 3-5 days for Not Ready Cabinets."
   },
-  // {
-  //   question: "What should an agent do if a suspended customer asks to add an extra quota?",
-  //   image: "https://img.freepik.com/free-vector/wireless-router-electronic-device_107791-301.jpg",
-  //   options: ["Add it immediately", "Reject the request", "Add it but inform them it will only work after paying the due bill", "Give it for free"],
-  //   answer: "Add it but inform them it will only work after paying the due bill",
-  //   rationale: "Quota can be added through digital channels, but service won't work until the due amount is settled."
-  // },
   {
     question: "For the 'Extension Upselling Offer', if a customer buys an extension via Click to Chat, how long is the 'Free GBs' validity?",
     image: "",
@@ -114,6 +201,58 @@ const quizData: Question[] = [
     options: ["24 Hours", "48 Hours", "72 Hours", "1 week"],
     answer: "48 Hours",
     rationale: "SR 'Extension Offer Adjustment' (Short code 5048) has an SLA of 48 working hours."
+  },
+  {
+    question: "A customer wants a technical visit to check 3 separate PCs. How much will be the total charge on their next bill?",
+    image: "",
+    options: ["77.73 EGP", "155.46 EGP", "233.19 EGP", "Free of charge"],
+    answer: "233.19 EGP",
+    rationale: "The first PC check costs 77.73 EGP, and each additional PC costs an extra 77.73 EGP. (77.73 x 3 = 233.19)."
+  },
+  {
+    question: "What is the fee for a 'Voluntary Suspension' request per month (Tax Exclusive)?",
+    image: "",
+    options: ["Free", "10 EGP", "30 EGP", "50 EGP"],
+    answer: "30 EGP",
+    rationale: "Voluntary suspension costs 30 EGP per month (Excl. VAT) for a maximum of 2 months per year."
+  },
+  {
+    "question": "What is the Service Level Agreement (SLA) for a 'New Assign Home Visit Request' in Cairo and Alex?",
+    image: "",
+    "options": ["3 working days", "24 working hours", "2 working days", "5 working days"],
+    "answer": "2 working days",
+    "rationale": "The training material specifies that home visits for new assignments in Cairo and Alex should be completed within 2 working days."
+  },
+  {
+    "question": "What is the procedure if a customer received a router but it is not reflected on the system?",
+    image: q9,
+    "options": [
+      "Ask the customer to return it",
+      "Create a modification request to add/sync the router info",
+      "Ignore it until the next invoice",
+      "Charge the customer for a new router"
+    ],
+    "answer": "Create a modification request to add/sync the router info",
+    "rationale": "The instructions for router delivery issues require a modification request to ensure the system reflects the actual delivery."
+  },
+  {
+    "question": "What can a customer with a 'New Subscription' modify on their line?",
+    image: q10,
+    "options": [
+      "Only the static IP",
+      "Nothing until the first month passes",
+      "Anything related to the line (packages, offers, IP)",
+      "Only the router type"
+    ],
+    "answer": "Anything related to the line (packages, offers, IP)",
+    "rationale": "The notes explicitly state that for new subscriptions, the customer has the flexibility to modify any aspect of their line."
+  },
+  {
+    "question": "What is the SLA for a 'New Assign Home Visit Request' in governorates other than Cairo and Alex?",
+    image: "",
+    "options": ["2 working days", "3 working days", "4 working days", "7 working days"],
+    "answer": "3 working days",
+    "rationale": "While Cairo and Alex have a 2-day SLA, other governorates are allocated 3 working days for home visits."
   }
 ];
 
@@ -132,13 +271,28 @@ const QuizApp = () => {
     if (correct) setScore(score + 1);
   };
 
-  const handleNext = () => {
+  const handleShowScore = () => {
     setSelectedOption(null);
     setIsCorrect(null);
     if (currentQuestion + 1 < quizData.length) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      setShowScore(true);
+      setShowScore(true)
+    }
+  };
+
+  const handleNext = () => {
+    setSelectedOption(null);
+    setIsCorrect(null);
+    if (currentQuestion + 1 < quizData.length) {
+      setCurrentQuestion(currentQuestion + 1);
+    }
+  };
+  const handlePrev = () => {
+    setSelectedOption(null);
+    setIsCorrect(null);
+    if (0 < currentQuestion) {
+      setCurrentQuestion(currentQuestion - 1);
     }
   };
 
@@ -168,11 +322,31 @@ const QuizApp = () => {
             </div>
 
             <div className="p-6 sm:p-8">
-              <span className="text-xs font-bold tracking-widest text-orange-500 uppercase">
-                Question {currentQuestion + 1} of {quizData.length}
-              </span>
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold tracking-widest text-orange-500 uppercase">
+                  Question {currentQuestion + 1} of {quizData.length}
+                </span>
+                <div>
+                  <button
+                    onClick={handlePrev}
+                    className={`p-1 mr-1 text-left rounded-xl border-2 transition-all duration-200 text-sm font-medium
+                      ${selectedOption === null ? 'border-slate-200 hover:border-orange-300 hover:bg-orange-50' : ''}
+                    `}
+                  >
+                    <ArrowLeftCircleIcon />
+                  </button>
+                  <button
+                    onClick={handleNext}
+                    className={`p-1 text-left rounded-xl border-2 transition-all duration-200 text-sm font-medium
+                      ${selectedOption === null ? 'border-slate-200 hover:border-orange-300 hover:bg-orange-50' : ''}
+                    `}
+                  >
+                    <ArrowRightCircleIcon />
+                  </button>
+                </div>
+              </div>
 
-              <h3 className="text-xl font-bold text-slate-800 mt-2 mb-6 leading-tight uppercase">
+              <h3 className="text-xl font-bold text-slate-800 mt-2 mb-6 leading-tight">
                 {quizData[currentQuestion].question}
               </h3>
 
@@ -218,7 +392,7 @@ const QuizApp = () => {
                     <span className="font-bold">Why? </span> {quizData[currentQuestion].rationale}
                   </p>
                   <button
-                    onClick={handleNext}
+                    onClick={handleShowScore}
                     className="mt-4 w-full py-3 bg-slate-800 text-white font-bold rounded-lg hover:bg-slate-900 shadow-md"
                   >
                     Next Question
