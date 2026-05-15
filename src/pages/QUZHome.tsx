@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import q1 from "../assets/quiz/q1.png";
 import q2 from "../assets/quiz/q2.png";
 import q3 from "../assets/quiz/q3.png";
@@ -9,7 +9,7 @@ import q7 from "../assets/quiz/q7.png";
 import q8 from "../assets/quiz/q8.png";
 import q9 from "../assets/quiz/q9.jpg";
 import q10 from "../assets/quiz/10.jpg";
-// import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from 'lucide-react';
+import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from 'lucide-react';
 
 interface Question {
   question: string;
@@ -52,7 +52,7 @@ const quizData: Question[] = [
     question: "Noise Margin on online gaming should not be less than",
     image: "",
     options: ["60", "40", "100", "360"],
-    answer: "10",
+    answer: "100",
     rationale: ""
   },
   {
@@ -263,62 +263,38 @@ const QuizApp = () => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
-  // 1. إضافة State للتايمر (مثلاً 30 ثانية)
-  const [timeLeft, setTimeLeft] = useState<number>(30);
-
-  // 2. تأثير التايمر
-  useEffect(() => {
-    // إذا ظهرت النتيجة النهائية أو اختار المستخدم إجابة بالفعل، نتوقف عن العد
-    if (showScore || selectedOption !== null) return;
-
-    // إذا انتهى الوقت
-    if (timeLeft === 0) {
-      handleAnswerClick(""); // نرسل إجابة فارغة لاعتبارها خطأ
-      return;
-    }
-
-    // نقص ثانية كل 1000 مللي ثانية
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => prev - 1);
-    }, 1000);
-
-    return () => clearInterval(timer); // تنظيف التايمر لتجنب Memory Leaks
-  }, [timeLeft, selectedOption, showScore]);
-
   const handleAnswerClick = (option: string) => {
     if (selectedOption !== null) return;
     setSelectedOption(option);
-
     const correct = option === quizData[currentQuestion].answer;
     setIsCorrect(correct);
     if (correct) setScore(score + 1);
   };
 
-  const handleNextQuestionLogic = () => {
+  const handleShowScore = () => {
     setSelectedOption(null);
     setIsCorrect(null);
-    setTimeLeft(30); // 3. إعادة تعيين التايمر للسؤال الجديد
-
     if (currentQuestion + 1 < quizData.length) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      setShowScore(true);
+      setShowScore(true)
     }
   };
 
-  // تعديل وظائف التنقل لتشمل ريست التايمر
-  // const handleNext = () => {
-  //   if (selectedOption !== null) handleNextQuestionLogic();
-  // };
-
-  // const handlePrev = () => {
-  //   if (currentQuestion > 0) {
-  //     setSelectedOption(null);
-  //     setIsCorrect(null);
-  //     setTimeLeft(30);
-  //     setCurrentQuestion(currentQuestion - 1);
-  //   }
-  // };
+  const handleNext = () => {
+    setSelectedOption(null);
+    setIsCorrect(null);
+    if (currentQuestion + 1 < quizData.length) {
+      setCurrentQuestion(currentQuestion + 1);
+    }
+  };
+  const handlePrev = () => {
+    setSelectedOption(null);
+    setIsCorrect(null);
+    if (0 < currentQuestion) {
+      setCurrentQuestion(currentQuestion - 1);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-slate-100 flex items-center justify-center p-4 antialiased" dir="ltr">
@@ -327,64 +303,99 @@ const QuizApp = () => {
           <div className="p-10 text-center">
             <h2 className="text-3xl font-bold text-orange-600 mb-4">Quiz Completed!</h2>
             <div className="text-6xl font-black text-slate-800 mb-6">{score} / {quizData.length}</div>
-            <button onClick={() => window.location.reload()} className="px-8 py-3 bg-orange-600 text-white font-bold rounded-lg">Restart</button>
+            <p className="text-slate-500 mb-8 text-lg">Great effort! Review guidelines to stay sharp.</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="w-full sm:w-auto px-8 py-3 bg-orange-600 text-white font-bold rounded-lg hover:bg-orange-700 transition-colors shadow-lg"
+            >
+              Restart Training
+            </button>
           </div>
         ) : (
           <div className="flex flex-col">
             {/* Progress Bar */}
-            <div className="h-2 bg-slate-200 flex">
+            <div className="h-2 bg-slate-200">
               <div
-                className={`h-full transition-all duration-1000 ${timeLeft < 10 ? 'bg-red-500' : 'bg-orange-500'}`}
-                style={{ width: `${(timeLeft / 30) * 100}%` }}
+                className="h-full bg-orange-500 transition-all duration-500"
+                style={{ width: `${((currentQuestion + 1) / quizData.length) * 100}%` }}
               ></div>
             </div>
 
             <div className="p-6 sm:p-8">
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between">
                 <span className="text-xs font-bold tracking-widest text-orange-500 uppercase">
                   Question {currentQuestion + 1} of {quizData.length}
                 </span>
-
-                {/* Timer UI */}
-                <div className={`flex items-center gap-2 font-mono font-bold ${timeLeft < 10 ? 'text-red-500 animate-pulse' : 'text-slate-600'}`}>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  {timeLeft}s
+                <div>
+                  <button
+                    onClick={handlePrev}
+                    className={`p-1 mr-1 text-left rounded-xl border-2 transition-all duration-200 text-sm font-medium
+                      ${selectedOption === null ? 'border-slate-200 hover:border-orange-300 hover:bg-orange-50' : ''}
+                    `}
+                  >
+                    <ArrowLeftCircleIcon />
+                  </button>
+                  <button
+                    onClick={handleNext}
+                    className={`p-1 text-left rounded-xl border-2 transition-all duration-200 text-sm font-medium
+                      ${selectedOption === null ? 'border-slate-200 hover:border-orange-300 hover:bg-orange-50' : ''}
+                    `}
+                  >
+                    <ArrowRightCircleIcon />
+                  </button>
                 </div>
               </div>
 
-              <h3 className="text-xl font-bold text-slate-800 mb-6 leading-tight">
+              <h3 className="text-xl font-bold text-slate-800 mt-2 mb-6 leading-tight">
                 {quizData[currentQuestion].question}
               </h3>
+
+              {/* Image Section */}
+              {quizData[currentQuestion].image && (
+                <div className="mb-6 rounded-xl overflow-hidden border border-slate-200 bg-slate-50 flex justify-center">
+                  <img
+                    src={quizData[currentQuestion].image}
+                    // alt="Question context"
+                    className="w-auto object-contain p-2"
+                  />
+                </div>
+              )}
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
                 {quizData[currentQuestion].options.map((option, idx) => (
                   <button
                     key={idx}
-                    disabled={selectedOption !== null}
                     onClick={() => handleAnswerClick(option)}
                     className={`p-4 text-left rounded-xl border-2 transition-all duration-200 text-sm font-medium
-                      ${selectedOption === null ? 'border-slate-200 hover:border-orange-300' : 'cursor-default'}
-                      ${selectedOption === option ? (isCorrect ? 'border-green-500 bg-green-50' : 'border-red-500 bg-red-50') : 'opacity-60'}
-                      ${selectedOption !== null && option === quizData[currentQuestion].answer ? 'border-green-500 bg-green-100 opacity-100' : ''}
+                      ${selectedOption === null ? 'border-slate-200 hover:border-orange-300 hover:bg-orange-50' : ''}
+                      ${selectedOption === option ? (isCorrect ? 'border-green-500 bg-green-50 text-green-700' : 'border-red-500 bg-red-50 text-red-700') : 'border-slate-100 opacity-60'}
+                      ${selectedOption !== null && option === quizData[currentQuestion].answer ? 'border-green-500 bg-green-100 text-green-800 opacity-100' : ''}
                     `}
                   >
+                    <span className="inline-block w-6 h-6 rounded-full border border-current text-center mr-2 leading-5 text-xs">
+                      {String.fromCharCode(65 + idx)}
+                    </span>
                     {option}
                   </button>
                 ))}
               </div>
 
-              {selectedOption !== null && (
-                <div className={`p-5 rounded-xl border-l-4 mb-6 ${isCorrect ? 'bg-green-50 border-green-500' : 'bg-red-50 border-red-500'}`}>
-                  <p className="text-sm text-slate-700 italic">
+              {/* Feedback Section */}
+              {selectedOption && (
+                <div className={`p-5 rounded-xl border-l-4 mb-6 transition-all animate-in fade-in slide-in-from-top-4
+                  ${isCorrect ? 'bg-green-50 border-green-500' : 'bg-red-50 border-red-500'}
+                `}>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-lg font-bold">{isCorrect ? '✓ Well Done!' : '✗ Keep Learning!'}</span>
+                  </div>
+                  <p className="text-sm text-slate-700 leading-relaxed italic">
                     <span className="font-bold">Why? </span> {quizData[currentQuestion].rationale}
                   </p>
                   <button
-                    onClick={handleNextQuestionLogic}
+                    onClick={handleShowScore}
                     className="mt-4 w-full py-3 bg-slate-800 text-white font-bold rounded-lg hover:bg-slate-900 shadow-md"
                   >
-                    {currentQuestion + 1 === quizData.length ? "Finish Quiz" : "Next Question"}
+                    Next Question
                   </button>
                 </div>
               )}
